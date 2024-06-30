@@ -1,0 +1,29 @@
+.shimmer-card {
+  margin-top: 1vw;
+  width: 20vw;
+  padding: 15px 8px;
+  height: 350px;
+}
+
+.shimmer-img {
+  width: 100%;
+  height: 30vh;
+  border-radius: 10px;
+  background-color: #ccc;
+}
+
+.shimmer-card > .shimmer-h3,
+.shimmer-h4 {
+  margin: 1.2vw 0;
+}
+
+.shimmer-card > .shimmer-h3 {
+  border: 6px solid #ccc;
+  border-radius: 10px;
+}
+
+.shimmer-card > .shimmer-h4 {
+  border: 6px solid #ccc;
+  border-radius: 10px;
+  width: 8vw;
+}
