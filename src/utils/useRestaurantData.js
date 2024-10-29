@@ -1,4 +1,4 @@
-import { FETCH_RESTAURANT_URL } from "../config";
+import { FETCH_RESTAURANT_URL } from "../constants";
 import { useState, useEffect } from "react";
 
 const useRestaurantData = () => {
@@ -24,7 +24,7 @@ const useRestaurantData = () => {
     );
   }
   //Return restaurant Data
-  return { allRestaurants, filteredRestaurants,setFilteredRestaurants };
+  return { allRestaurants, filteredRestaurants, setFilteredRestaurants };
 };
 
 export default useRestaurantData;

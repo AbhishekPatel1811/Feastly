@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Logo from "../assets/Logo.png";
 
 const HeaderComponent = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -7,10 +8,7 @@ const HeaderComponent = () => {
   return (
     <header className="header">
       <div className="left">
-        <img
-          className="logo"
-          src="https://upload.wikimedia.org/wikipedia/commons/1/14/Feastly_Logo.png"
-          alt="logo"></img>
+        <img className="logo" src={Logo} alt="logo"></img>
       </div>
       <div className="right">
         <ul className="nav-links">
