@@ -10,24 +10,26 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import FooterComponent from "./components/Footer";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Shimmer from "./components/Shimmer";
+import "./index.css";
 
+// Lazy load Instamart component
 const Instamart = lazy(() => import("./components/Instamart"));
 
+// Main App Layout with Tailwind CSS classes for styling
 const AppLayout = () => {
   return (
-    <>
-      <div className="app-container">
-        <HeaderComponent />
-        <main style={{ flex: "1" }}>
-          {/* Outlet is used to create nested routes we have to pass in children's */}
-          <Outlet />
-        </main>
-        <FooterComponent />
-      </div>
-    </>
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      <HeaderComponent />
+      <main className="flex-grow container mx-auto px-4 py-6">
+        {/* Outlet is used to render child components in nested routes */}
+        <Outlet />
+      </main>
+      <FooterComponent />
+    </div>
   );
 };
 
+// Defining routes
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -68,5 +70,6 @@ const appRouter = createBrowserRouter([
   },
 ]);
 
+// Rendering the root component
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<RouterProvider router={appRouter} />);
