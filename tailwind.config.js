@@ -6,7 +6,6 @@ module.exports = {
         pulse: "pulse 1.5s ease-in-out infinite",
       },
       colors: {
-        softBlue: "#92b4dc",
         slateBlue: "#313b47",
       },
       fontFamily: {
