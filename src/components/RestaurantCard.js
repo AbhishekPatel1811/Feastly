@@ -1,4 +1,5 @@
 import { IMG_CDN_URL } from "../constants";
+import stars from "../assets/stars.png";
 
 const RestaurantCard = ({
   name,
@@ -8,20 +9,19 @@ const RestaurantCard = ({
   sla,
 }) => {
   return (
-    <div className="card">
-      <img src={IMG_CDN_URL + cloudinaryImageId} />
-      <h3>
+    <div className="w-[22vw] px-6 py-4">
+      <img
+        className="w-full h-[30vh] object-cover object-bottom rounded-xl drop-shadow-xl"
+        src={IMG_CDN_URL + cloudinaryImageId}
+      />
+      <h3 className="mt-6 flex justify-start items-center gap-4 font-thin tracking-wide">
         <b>{name}</b>
       </h3>
-      <h4>
-        <img
-          className="stars"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHB0q0R6R_AYydfF1jOHKx37JvWDtgIs6nNQ&s"
-          alt="stars"
-        />
+      <h4 className="mt-3 flex justify-start items-center gap-2 font-thin tracking-wide">
+        <img className="h-4" src={stars} alt="stars" />
         {avgRating} • {sla.slaString}
       </h4>
-      <h4>{cuisines.join(", ")}</h4>
+      <h4 className="mt-3">{cuisines.join(", ")}</h4>
     </div>
   );
 };
