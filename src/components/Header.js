@@ -33,7 +33,7 @@ const HeaderComponent = () => {
           </Link>
         </ul>
 
-        <div class="h-8 w-px bg-zinc-200 hidden sm:block"></div>
+        <div className="h-8 w-px bg-zinc-200 hidden sm:block"></div>
 
         {isLoggedIn ? (
           <div className=" bg-zinc-100 py-1.5 px-3 rounded-lg ml-1">
@@ -44,7 +44,7 @@ const HeaderComponent = () => {
             </button>
           </div>
         ) : (
-          <div className="flex justify-center items-center gap-2  bg-zinc-100 py-1.5 px-3 rounded-lg ml-1 ">
+          <div className="flex justify-center items-center gap-2 bg-zinc-100 py-1.5 px-3 rounded-lg ml-1 ">
             <button
               className="text-sm text-gray-900"
               onClick={() => setIsLoggedIn(true)}>
