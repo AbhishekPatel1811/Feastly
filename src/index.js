@@ -20,11 +20,13 @@ const AppLayout = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <HeaderComponent />
-      <main className="flex-grow container mx-auto px-4 py-6">
+      <main className="mt-10 flex flex-col min-h-[calc(100vh-3.5rem-1px)] w-full">
         {/* Outlet is used to render child components in nested routes */}
-        <Outlet />
+        <div className="flex-1 flex flex-col h-full">
+          <Outlet />
+        </div>
+        <FooterComponent />
       </main>
-      <FooterComponent />
     </div>
   );
 };
