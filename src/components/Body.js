@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
@@ -13,10 +13,15 @@ const BodyComponent = () => {
     useRestaurantData();
   const isOnline = useOnline();
 
+  //To filter based on each key press
+  useEffect(() => {
+    filterSearchRestaurants();
+  }, [searchInput, allRestaurants]);
+
   if (!isOnline) {
     return (
       <h1 className="flex justify-center items-center text-3xl font-medium">
-        🔴 OFFLINE, Please check your internet connection
+        🔴 OFFLINE, Please check your internet connection...
       </h1>
     );
   }
@@ -24,19 +29,14 @@ const BodyComponent = () => {
   // Handle case where filteredRestaurants is not an array
   if (!Array.isArray(filteredRestaurants)) return <h1>No restaurants found</h1>;
 
-  //Filter restaurants
-  const handleSearch = () => {
-    // Filter the data
-    const data = filterData(searchInput, allRestaurants);
+  const handleInputChange = (e) => setSearchInput(e.target.value);
 
-    // Update the state - restaurants
-    setFilteredRestaurants(data);
-  };
+  const filterSearchRestaurants = () => {
+    //Filter the data
+    const filteredData = filterData(searchInput, allRestaurants);
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
+    //update the state - restaurants
+    setFilteredRestaurants(filteredData);
   };
 
   return allRestaurants.length === 0 ? (
@@ -46,30 +46,30 @@ const BodyComponent = () => {
       <div className="flex justify-center items-center">
         <input
           type="text"
-          className="px-4 py-2 w-[30vw] border-slate-200 bg-white/75 backdrop-blur-lg rounded-lg pl-6 text-md text-slateBlue focus:outline-none focus:ring-2 focus:ring-zinc-300"
+          className="px-4 py-2 w-[30vw] border-slate-200 rounded-lg pl-6 text-md text-slateBlue focus:outline-none focus:ring-2 focus:ring-zinc-300"
           placeholder="Search for dishes"
           value={searchInput}
-          onChange={(e) => {
-            setSearchInput(e.target.value);
-          }}
-          onKeyUp={handleKeyPress}
+          onChange={handleInputChange}
         />
-        <span
-          className="relative right-8 cursor-pointer"
-          onClick={handleSearch}>
+        <span className="relative right-8 cursor-pointer">
           <IoSearchSharp className="text-slate-500" size={20} />
         </span>
       </div>
       <div className="mt-10 flex flex-wrap justify-center gap-4">
-        {filteredRestaurants.map((restaurant) => {
-          return (
+        {filteredRestaurants.length === 1 &&
+        filteredRestaurants[0].info.name === "No results found" ? (
+          <h2 className="text-xl font-semibold text-gray-500">
+            No results found. Please try a different search.
+          </h2>
+        ) : (
+          filteredRestaurants.map((restaurant) => (
             <Link
               to={"/restaurant/" + restaurant?.info?.id}
               key={restaurant?.info?.id}>
               <RestaurantCard {...restaurant.info} />
             </Link>
-          );
-        })}
+          ))
+        )}
       </div>
     </>
   );
