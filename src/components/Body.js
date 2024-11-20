@@ -1,16 +1,27 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { IoSearchSharp } from "react-icons/io5";
+import { FaCircleChevronRight } from "react-icons/fa6";
+import { FaCircleChevronLeft } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { WHATSONYOURMIND_IMG_CDN_URL } from "../constants";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
 import useRestaurantData from "../utils/useRestaurantData";
+import useWhatsOnYourMind from "../utils/useWhatsOnYourMind";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-import { IoSearchSharp } from "react-icons/io5";
 
 const BodyComponent = () => {
   const [searchInput, setSearchInput] = useState();
-  const { allRestaurants, filteredRestaurants, setFilteredRestaurants } =
-    useRestaurantData();
+  const {
+    allRestaurants,
+    filteredRestaurants,
+    setFilteredRestaurants,
+    topRestaurantTitle,
+  } = useRestaurantData();
+
+  const { menuItems, menuTitle } = useWhatsOnYourMind();
+  const sliderRef = useRef();
   const isOnline = useOnline();
 
   //To filter based on each key press
@@ -39,6 +50,24 @@ const BodyComponent = () => {
     setFilteredRestaurants(filteredData);
   };
 
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({
+        left: -500,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({
+        left: 500,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return allRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
@@ -55,32 +84,65 @@ const BodyComponent = () => {
           <IoSearchSharp className="text-slate-500" size={20} />
         </span>
       </div>
-      <div className="mt-10 flex flex-wrap justify-center gap-4">
-        {filteredRestaurants.length === 1 &&
-        filteredRestaurants[0].info.name === "No results found" ? (
-          <h2 className="text-xl font-semibold text-gray-500">
-            No results found. Please try a different search.
-          </h2>
-        ) : (
-          filteredRestaurants.map((restaurant) => (
-            <Link
-              to={"/restaurant/" + restaurant?.info?.id}
-              key={restaurant?.info?.id}>
-              <RestaurantCard {...restaurant.info} />
-            </Link>
-          ))
-        )}
+
+      {/* What's on your mind menu */}
+      <div className="mt-4">
+        <div className="mt-8 mx-28">
+          <div className="flex justify-between items-center">
+            <h1 className=" text-xl font-extrabold">{menuTitle}</h1>
+            <div className="flex gap-2">
+              <button onClick={scrollLeft}>
+                <FaCircleChevronLeft className="h-6 w-6 bg-zinc-800 text-white rounded-full shadow-lg" />
+              </button>
+              <button onClick={scrollRight}>
+                <FaCircleChevronRight className="h-6 w-6 bg-zinc-800 text-white rounded-full shadow-lg" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          ref={sliderRef}
+          className="mt-4 flex overflow-x-hidden ml-28 mr-24 scroll-smooth">
+          {menuItems.map((item) => {
+            return (
+              <div key={item.id} className="flex-shrink-0 w-40 px-4 h-full">
+                <img
+                  src={WHATSONYOURMIND_IMG_CDN_URL + item.imageId}
+                  alt={item.accessibility?.altText}
+                  className="h-full w-full object-cover mb-2 rounded-xl drop-shadow-xl"
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="mt-8 mx-32 border border-gray-300/50" />
+
+      {/* Top 20 restaurants */}
+      <div className="mt-8 mx-24">
+        <h1 className="flex justify-start items-center text-xl font-extrabold">
+          {topRestaurantTitle}
+        </h1>
+        <div className="mt-2 flex flex-wrap justify-center gap-6">
+          {filteredRestaurants.length === 1 &&
+          filteredRestaurants[0].info.name === "No results found" ? (
+            <h2 className="text-xl font-semibold text-gray-500">
+              No results found. Please try a different search.
+            </h2>
+          ) : (
+            filteredRestaurants.map((restaurant) => (
+              <Link
+                to={"/restaurant/" + restaurant?.info?.id}
+                key={restaurant?.info?.id}>
+                <RestaurantCard {...restaurant.info} />
+              </Link>
+            ))
+          )}
+        </div>
       </div>
     </>
   );
 };
-
-// <RestaurantCard {...restaurantList[1].info} />
-// <RestaurantCard {...restaurantList[2].info} />
-// <RestaurantCard {...restaurantList[3].info} />
-// <RestaurantCard {...restaurantList[4].info} />
-// <RestaurantCard {...restaurantList[5].info} />
-// <RestaurantCard {...restaurantList[6].info} />
-// <RestaurantCard {...restaurantList[7].info} />\
 
 export default BodyComponent;

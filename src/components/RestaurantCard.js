@@ -11,7 +11,7 @@ const RestaurantCard = ({
 }) => {
   return (
     <>
-      <div className="w-[20vw] px-2 py-4">
+      <div className="w-[18vw] px-2 py-4">
         <img
           className="w-full h-[30vh] object-cover object-bottom rounded-xl drop-shadow-xl"
           src={IMG_CDN_URL + cloudinaryImageId}
