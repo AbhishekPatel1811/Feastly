@@ -92,24 +92,26 @@ const BodyComponent = () => {
             <h1 className=" text-xl font-extrabold">{menuTitle}</h1>
             <div className="flex gap-2">
               <button onClick={scrollLeft}>
-                <FaCircleChevronLeft className="h-6 w-6 bg-zinc-800 text-white rounded-full shadow-lg" />
+                <FaCircleChevronLeft className="h-6 w-6 rounded-full shadow-lg" />
               </button>
               <button onClick={scrollRight}>
-                <FaCircleChevronRight className="h-6 w-6 bg-zinc-800 text-white rounded-full shadow-lg" />
+                <FaCircleChevronRight className="h-6 w-6 rounded-full shadow-lg" />
               </button>
             </div>
           </div>
         </div>
         <div
           ref={sliderRef}
-          className="mt-4 flex overflow-x-hidden ml-28 mr-24 scroll-smooth">
+          className="mt-4 flex overflow-x-hidden mx-28 scroll-smooth">
           {menuItems.map((item) => {
             return (
-              <div key={item.id} className="flex-shrink-0 w-40 px-4 h-full">
+              <div
+                key={item.id}
+                className="flex-shrink-0 w-[8.5rem] px-2 h-full ">
                 <img
                   src={WHATSONYOURMIND_IMG_CDN_URL + item.imageId}
                   alt={item.accessibility?.altText}
-                  className="h-full w-full object-cover mb-2 rounded-xl drop-shadow-xl"
+                  className="h-full w-full object-cover mb-2 drop-shadow-md rounded-lg"
                 />
               </div>
             );
@@ -117,13 +119,15 @@ const BodyComponent = () => {
         </div>
       </div>
 
-      <div className="mt-8 mx-32 border border-gray-300/50" />
+      <div className="mt-8 mx-[7.5rem] border border-gray-300/50" />
 
       {/* Top 20 restaurants */}
-      <div className="mt-8 mx-24">
-        <h1 className="flex justify-start items-center text-xl font-extrabold">
-          {topRestaurantTitle}
-        </h1>
+      <div className="mt-4">
+        <div className="mt-8 mx-28">
+          <h1 className="flex justify-start items-center text-xl font-extrabold">
+            {topRestaurantTitle}
+          </h1>
+        </div>
         <div className="mt-2 flex flex-wrap justify-center gap-6">
           {filteredRestaurants.length === 1 &&
           filteredRestaurants[0].info.name === "No results found" ? (
