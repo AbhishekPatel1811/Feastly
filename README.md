@@ -1,13 +1,11 @@
 # Feastly - Explore, Discover, and Savor in Real-Time 🥘 🍽️
 
-Built with React.js, Swiggy API, Tailwind CSS, and Parcel
-
 ![Feastly Logo](src/assets/Logo.png)
 
-Feastly is a next-generation food ordering application that offers users real-time restaurant listings, menu previews, and a smooth browsing experience. 
+Feastly is your gateway to a next-generation food-ordering experience. Powered by **React.js**, integrated with the **Swiggy API**, styled using **Tailwind CSS**, and bundled with **Parcel** that offers users real-time restaurant listings, menu previews, and a smooth browsing experience. 
 By leveraging Swiggy's live API, React's modern optimizations, and a clean Tailwind CSS design, Feastly offers a intuitive user interface and optimized performance for a seamless experience.
 
-## ✨ Features
+## ✨ Key Highlights
 
 - **📊 Real-Time Listings** – Integrated with Swiggy's live API for updated restaurant info.
 - **📱 Offline Functionality** – Notifies users of their internet status for uninterrupted browsing.
@@ -23,7 +21,7 @@ By leveraging Swiggy's live API, React's modern optimizations, and a clean Tailw
 Ensure you have the following set up:
 
 - **Node.js** and **npm** or **yarn**
-- Access to Swiggy's API (for live restaurant data)
+- Access to **Swiggy's API** 
 
 ## 🛠️ Getting Started
 
